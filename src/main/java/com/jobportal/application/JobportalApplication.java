@@ -1,13 +1,13 @@
-package com.hospital.appointment_system;
+package com.jobportal.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HospitalAppointmentSystemApplication {
+public class JobportalApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HospitalAppointmentSystemApplication.class, args);
+		SpringApplication.run(JobportalApplication.class, args);
 	}
 
 }

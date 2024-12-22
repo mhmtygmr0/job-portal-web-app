@@ -1,10 +1,10 @@
-package com.hospital.appointment_system;
+package com.jobportal.application;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HospitalAppointmentSystemApplicationTests {
+class JobportalApplicationTests {
 
 	@Test
 	void contextLoads() {
