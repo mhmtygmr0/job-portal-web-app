@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "recruiter_profile")
-public class Recruiter {
+public class RecruiterProfile {
 
     @Id
     private int userAccountId;
@@ -23,10 +23,10 @@ public class Recruiter {
     @Column(nullable = true, length = 64)
     private String profilePhoto;
 
-    public Recruiter() {
+    public RecruiterProfile() {
     }
 
-    public Recruiter(int userAccountId, Users userId, String firstName, String lastName, String city, String state, String country, String company, String profilePhoto) {
+    public RecruiterProfile(int userAccountId, Users userId, String firstName, String lastName, String city, String state, String country, String company, String profilePhoto) {
         this.userAccountId = userAccountId;
         this.userId = userId;
         this.firstName = firstName;
@@ -36,6 +36,10 @@ public class Recruiter {
         this.country = country;
         this.company = company;
         this.profilePhoto = profilePhoto;
+    }
+
+    public RecruiterProfile(Users users) {
+        this.userId = users;
     }
 
     public int getUserAccountId() {
