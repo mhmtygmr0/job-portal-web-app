@@ -20,4 +20,8 @@ public class RecruiterProfileService {
     public Optional<RecruiterProfile> getOne(Integer id) {
         return this.recruiterProfileRepository.findById(id);
     }
+
+    public RecruiterProfile addNew(RecruiterProfile recruiterProfile) {
+        return this.recruiterProfileRepository.save(recruiterProfile);
+    }
 }
