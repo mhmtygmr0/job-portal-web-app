@@ -52,7 +52,7 @@ public class UsersController {
         }
 
         this.usersService.addNew(users);
-        return "dashboard";
+        return "redirect:/dashboard/";
     }
 
     @GetMapping("/login")
