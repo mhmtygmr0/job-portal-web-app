@@ -1,10 +1,10 @@
 package com.jobportal.application.service;
 
-import com.jobportal.application.entity.JobPostActivity;
-import com.jobportal.application.entity.RecruiterJobsDto;
+import com.jobportal.application.entity.*;
 import com.jobportal.application.repository.JobPostActivityRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,6 +21,15 @@ public class JobPostActivityService {
     }
 
     public List<RecruiterJobsDto> getRecruiterJobs(int recruiter) {
+        List<IRecruiterJobs> recruiterJobs = this.jobPostActivityRepository.getRecruiterJobs(recruiter);
 
+        List<RecruiterJobsDto> recruiterJobsDtoList = new ArrayList<>();
+
+        for (IRecruiterJobs rec : recruiterJobs) {
+            JobLocation location = new JobLocation(rec.getLocationId(), rec.getCity(), rec.getState(), rec.getCountry());
+            JobCompany company = new JobCompany(rec.getCompanyId(), rec.getName(), "");
+            recruiterJobsDtoList.add(new RecruiterJobsDto(rec.getTotalCandidates(), rec.getJob_post_id(), rec.getJob_title(), location, company));
+        }
+        return recruiterJobsDtoList;
     }
 }

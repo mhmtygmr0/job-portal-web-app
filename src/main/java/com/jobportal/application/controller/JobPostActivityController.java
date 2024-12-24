@@ -1,6 +1,8 @@
 package com.jobportal.application.controller;
 
 import com.jobportal.application.entity.JobPostActivity;
+import com.jobportal.application.entity.RecruiterJobsDto;
+import com.jobportal.application.entity.RecruiterProfile;
 import com.jobportal.application.entity.Users;
 import com.jobportal.application.service.JobPostActivityService;
 import com.jobportal.application.service.UsersService;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class JobPostActivityController {
@@ -35,7 +38,8 @@ public class JobPostActivityController {
             String currentUserName = authentication.getName();
             model.addAttribute("username", currentUserName);
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("Recruiter"))) {
-
+                List<RecruiterJobsDto> recruiterJobs = this.jobPostActivityService.getRecruiterJobs(((RecruiterProfile) currentUserProfile).getUserAccountId());
+                model.addAttribute("jobPost", recruiterJobs);
             }
         }
         model.addAttribute("user", currentUserProfile);

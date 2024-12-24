@@ -1,8 +1,5 @@
 package com.jobportal.application.entity;
 
-import jakarta.persistence.Entity;
-
-@Entity
 public class RecruiterJobsDto {
 
     private Long totalCandidates;
