@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/job-seeker-profile")
@@ -40,6 +41,17 @@ public class JobSeekerProfileController {
 
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             Users user = this.usersRepository.findByEmail(authentication.getName()).orElseThrow(() -> new UsernameNotFoundException("User not found."));
+            Optional<JobSeekerProfile> seekerProfile = this.jobSeekerProfileService.getOne(user.getUserId());
+            if (seekerProfile.isPresent()) {
+                jobSeekerProfile = seekerProfile.get();
+                if (jobSeekerProfile.getSkills().isEmpty()) {
+                    skillsList.add(new Skills());
+                    jobSeekerProfile.setSkills(skillsList);
+                }
+            }
+
+            model.addAttribute("skills", skillsList);
+            model.addAttribute("profile", jobSeekerProfile);
         }
 
         return "job-seeker-profile";
