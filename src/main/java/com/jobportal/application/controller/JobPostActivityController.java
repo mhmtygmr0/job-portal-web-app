@@ -37,19 +37,7 @@ public class JobPostActivityController {
     }
 
     @GetMapping("/dashboard/")
-    public String searchJobs(Model model,
-                             @RequestParam(value = "job", required = false) String job,
-                             @RequestParam(value = "location", required = false) String location,
-                             @RequestParam(value = "partTime", required = false) String partTime,
-                             @RequestParam(value = "fullTime", required = false) String fullTime,
-                             @RequestParam(value = "freelance", required = false) String freelance,
-                             @RequestParam(value = "remoteOnly", required = false) String remoteOnly,
-                             @RequestParam(value = "officeOnly", required = false) String officeOnly,
-                             @RequestParam(value = "partialRemote", required = false) String partialRemote,
-                             @RequestParam(value = "today", required = false) boolean today,
-                             @RequestParam(value = "days7", required = false) boolean days7,
-                             @RequestParam(value = "days30", required = false) boolean days30
-    ) {
+    public String searchJobs(Model model, @RequestParam(value = "job", required = false) String job, @RequestParam(value = "location", required = false) String location, @RequestParam(value = "partTime", required = false) String partTime, @RequestParam(value = "fullTime", required = false) String fullTime, @RequestParam(value = "freelance", required = false) String freelance, @RequestParam(value = "remoteOnly", required = false) String remoteOnly, @RequestParam(value = "officeOnly", required = false) String officeOnly, @RequestParam(value = "partialRemote", required = false) String partialRemote, @RequestParam(value = "today", required = false) boolean today, @RequestParam(value = "days7", required = false) boolean days7, @RequestParam(value = "days30", required = false) boolean days30) {
 
         model.addAttribute("partTime", Objects.equals(partTime, "Part-Time"));
         model.addAttribute("fullTime", Objects.equals(partTime, "Full-Time"));
@@ -99,8 +87,7 @@ public class JobPostActivityController {
         if (!dateSearchFlag && !remote && !type && !StringUtils.hasText(job) && !StringUtils.hasText(location)) {
             jobPost = this.jobPostActivityService.getAll();
         } else {
-            jobPost = this.jobPostActivityService.search(job, location, Arrays.asList(partTime, fullTime, freelance),
-                    Arrays.asList(remoteOnly, officeOnly, partialRemote), searchDate);
+            jobPost = this.jobPostActivityService.search(job, location, Arrays.asList(partTime, fullTime, freelance), Arrays.asList(remoteOnly, officeOnly, partialRemote), searchDate);
         }
 
         Object currentUserProfile = this.usersService.getCurrentUserProfile();
