@@ -37,38 +37,36 @@ public class UsersService {
     public Users addNew(Users users) {
         users.setActive(true);
         users.setRegistrationDate(new Date(System.currentTimeMillis()));
-        users.setPassword(this.passwordEncoder.encode(users.getPassword()));
-        Users savedUser = this.usersRepository.save(users);
+        users.setPassword(passwordEncoder.encode(users.getPassword()));
+        Users savedUser = usersRepository.save(users);
         int userTypeId = users.getUserTypeId().getUserTypeId();
 
         if (userTypeId == 1) {
-            this.recruiterProfileRepository.save(new RecruiterProfile(savedUser));
+            recruiterProfileRepository.save(new RecruiterProfile(savedUser));
         } else {
-            this.jobSeekerProfileRepository.save(new JobSeekerProfile(savedUser));
+            jobSeekerProfileRepository.save(new JobSeekerProfile(savedUser));
         }
 
         return savedUser;
     }
 
-    public Optional<Users> getUserByEmail(String email) {
-        return this.usersRepository.findByEmail(email);
-    }
-
     public Object getCurrentUserProfile() {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
-            Users users = this.usersRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Could not found user"));
+            Users users = usersRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Could not found " + "user"));
             int userId = users.getUserId();
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("Recruiter"))) {
-                RecruiterProfile recruiterProfile = this.recruiterProfileRepository.findById(userId).orElse(new RecruiterProfile());
+                RecruiterProfile recruiterProfile = recruiterProfileRepository.findById(userId).orElse(new RecruiterProfile());
                 return recruiterProfile;
             } else {
-                JobSeekerProfile jobSeekerProfile = this.jobSeekerProfileRepository.findById(userId).orElse(new JobSeekerProfile());
+                JobSeekerProfile jobSeekerProfile = jobSeekerProfileRepository.findById(userId).orElse(new JobSeekerProfile());
                 return jobSeekerProfile;
             }
         }
+
         return null;
     }
 
@@ -83,4 +81,13 @@ public class UsersService {
 
         return null;
     }
+
+    public Users findByEmail(String currentUsername) {
+        return usersRepository.findByEmail(currentUsername).orElseThrow(() -> new UsernameNotFoundException("User not " + "found"));
+    }
+
+    public Optional<Users> getUserByEmail(String email) {
+        return usersRepository.findByEmail(email);
+    }
+
 }

@@ -19,11 +19,15 @@ public class JobSeekerApplyService {
         this.jobSeekerApplyRepository = jobSeekerApplyRepository;
     }
 
-    public List<JobSeekerApply> getCandidatesJobs(JobSeekerProfile userAccountID) {
-        return this.jobSeekerApplyRepository.findByUserId(userAccountID);
+    public List<JobSeekerApply> getCandidatesJobs(JobSeekerProfile userAccountId) {
+        return jobSeekerApplyRepository.findByUserId(userAccountId);
     }
 
     public List<JobSeekerApply> getJobCandidates(JobPostActivity job) {
-        return this.jobSeekerApplyRepository.findByJob(job);
+        return jobSeekerApplyRepository.findByJob(job);
+    }
+
+    public void addNew(JobSeekerApply jobSeekerApply) {
+        jobSeekerApplyRepository.save(jobSeekerApply);
     }
 }

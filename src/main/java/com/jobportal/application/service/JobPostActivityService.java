@@ -19,31 +19,35 @@ public class JobPostActivityService {
     }
 
     public JobPostActivity addNew(JobPostActivity jobPostActivity) {
-        return this.jobPostActivityRepository.save(jobPostActivity);
+        return jobPostActivityRepository.save(jobPostActivity);
     }
 
     public List<RecruiterJobsDto> getRecruiterJobs(int recruiter) {
-        List<IRecruiterJobs> recruiterJobs = this.jobPostActivityRepository.getRecruiterJobs(recruiter);
+
+        List<IRecruiterJobs> recruiterJobsDtos = jobPostActivityRepository.getRecruiterJobs(recruiter);
 
         List<RecruiterJobsDto> recruiterJobsDtoList = new ArrayList<>();
 
-        for (IRecruiterJobs rec : recruiterJobs) {
-            JobLocation location = new JobLocation(rec.getLocationId(), rec.getCity(), rec.getState(), rec.getCountry());
-            JobCompany company = new JobCompany(rec.getCompanyId(), rec.getName(), "");
-            recruiterJobsDtoList.add(new RecruiterJobsDto(rec.getTotalCandidates(), rec.getJob_post_id(), rec.getJob_title(), location, company));
+        for (IRecruiterJobs rec : recruiterJobsDtos) {
+            JobLocation loc = new JobLocation(rec.getLocationId(), rec.getCity(), rec.getState(), rec.getCountry());
+            JobCompany comp = new JobCompany(rec.getCompanyId(), rec.getName(), "");
+            recruiterJobsDtoList.add(new RecruiterJobsDto(rec.getTotalCandidates(), rec.getJob_post_id(),
+                    rec.getJob_title(), loc, comp));
         }
         return recruiterJobsDtoList;
+
     }
 
     public JobPostActivity getOne(int id) {
-        return this.jobPostActivityRepository.findById(id).orElseThrow(() -> new RuntimeException("Job not found"));
+        return jobPostActivityRepository.findById(id).orElseThrow(() -> new RuntimeException("Job not found"));
     }
 
     public List<JobPostActivity> getAll() {
-        return this.jobPostActivityRepository.findAll();
+        return jobPostActivityRepository.findAll();
     }
 
     public List<JobPostActivity> search(String job, String location, List<String> type, List<String> remote, LocalDate searchDate) {
-        return Objects.isNull(searchDate) ? this.jobPostActivityRepository.searchWithoutDate(job, location, type, remote) : this.jobPostActivityRepository.search(job, location, type, remote, searchDate);
+        return Objects.isNull(searchDate) ? jobPostActivityRepository.searchWithoutDate(job, location, remote, type) :
+                jobPostActivityRepository.search(job, location, remote, type, searchDate);
     }
 }
