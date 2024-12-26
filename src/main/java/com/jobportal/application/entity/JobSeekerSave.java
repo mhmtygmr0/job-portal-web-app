@@ -12,7 +12,6 @@ public class JobSeekerSave implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "user_account_id")
     private JobSeekerProfile userId;
@@ -56,6 +55,6 @@ public class JobSeekerSave implements Serializable {
 
     @Override
     public String toString() {
-        return "JobSeekerSave{" + "id=" + id + ", userId=" + userId + ", job=" + job + '}';
+        return "JobSeekerSave{" + "id=" + id + ", userId=" + userId.toString() + ", job=" + job.toString() + '}';
     }
 }
