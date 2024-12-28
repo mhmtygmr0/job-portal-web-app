@@ -1,6 +1,6 @@
 # <p align="center">Job Portal Web App</p>
 
-## <p align="center">This application facilitates the management of job postings and applications for a job portal, enabling role-based access for administrators, recruiters, and job seekers. Continue reading to learn more details about its features and setup.</p>
+## <p align="center">This application facilitates the management of job postings and applications for a job portal, enabling role-based access for recruiters, and job seekers. Continue reading to learn more details about its features and setup.</p>
 
 ---
 
