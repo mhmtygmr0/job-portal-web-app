@@ -96,4 +96,4 @@ The application will start at: [http://localhost:8080](http://localhost:8080)
 
 ## Notes on the Frontend
 
-The frontend of this project was pre-designed and is not included in this repository. This repository only contains the backend implementation.
+This project includes both frontend and backend implementations. However, the frontend was previously developed by another source and integrated into this project.
