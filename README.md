@@ -1,113 +1,72 @@
-JOB PORTAL WEB APP
+# <p align="center">Job Portal Web App</p>
 
-A Spring Boot-based backend application designed to manage job postings and applications for a job portal.
+## <p align="center">This application facilitates the management of job postings and applications for a job portal, enabling role-based access for administrators, recruiters, and job seekers. Continue reading to learn more details about its features and setup.</p>
 
-FEATURES
+### Features of the Application:
+- **User Management**: Handles user registration, login, and role assignment.
+- **CRUD Operations**: Allows creating, reading, updating, and deleting job postings.
+- **Application Management**: Enables users to apply for jobs and manage their applications.
+- **Role-Based Access Control**: Ensures specific actions are restricted to roles (Admin, Recruiter, Job Seeker).
+- **RESTful API Design**: Clean API endpoints for seamless integration.
+- **Database Integration**: Manages data with JPA and Hibernate.
 
-User management (registration, login, and roles)
+### User Roles and Functionalities:
+1. **Job Seeker**:
+   - Register and log in to the portal.
+   - Browse and search for job postings.
+   - Apply for jobs and track applications.
+2. **Recruiter**:
+   - Register and log in to the portal.
+   - Post new job opportunities.
+   - Manage job postings (update or delete).
+   - View applications submitted by Job Seekers.
 
-CRUD operations for job postings
+### Technologies Used:
+- **Backend Framework**: Spring Boot
+- **Programming Language**: Java 21
+- **Database**: MySQL (or H2 for local development)
+- **ORM**: Hibernate / JPA
+- **Dependency Management**: Maven
+- **Security**: Spring Security with JWT Authentication
 
-Application management for users
+## Installation
 
-RESTful API design
+Before you begin, ensure you have the following installed on your machine:
+- **Java Development Kit (JDK) 21**: [Download and Install JDK](https://www.oracle.com/java/technologies/javase-jdk21-downloads.html)
+- **Maven 3.8 or later**: [Download and Install Maven](https://maven.apache.org/install.html)
+- **MySQL**: [Download MySQL](https://www.mysql.com/downloads/)
+- **Git**: [Download and Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- **IntelliJ IDEA** (or another IDE): [Download IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 
-Database integration using JPA and Hibernate
+### Clone the Repository
 
-Role-based access control (Admin, Recruiter, and Job Seeker)
+1. Clone the repository:  
+   `git clone https://github.com/mhmtygmr0/job-portal-web-app.git`
+2. Navigate to the project directory:  
+   `cd job-portal-web-app`
+3. Open the project in your IDE.
 
-TECHNOLOGIES USED
+### Database Setup
 
-Backend Framework: Spring Boot
+1. Create a database named `job_portal` in MySQL.
+2. Update the database configuration in `src/main/resources/application.properties` with your database details:
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/job_portal
+   spring.datasource.username=your_username
+   spring.datasource.password=your_password
+   spring.jpa.hibernate.ddl-auto=update
+   ```
+3. (Optional) Use H2 for local development by updating the configuration in `application.properties`.
 
-Programming Language: Java 21
+### Build and Run the Application
 
-Database: MySQL / H2 (for local development)
+1. Build the project:  
+   `mvn clean install`
+2. Run the project:  
+   `mvn spring-boot:run`
 
-ORM: Hibernate / JPA
+The application will start at: [http://localhost:8080](http://localhost:8080)
 
-Dependency Management: Maven
+## Notes on the Frontend
 
-Security: Spring Security with JWT Authentication
-
-NOTE ON FRONTEND
-
-The frontend part of this project was pre-designed and is not developed by me. This repository only includes the backend implementation.
-
-PREREQUISITES
-
-Ensure you have the following installed:
-
-Java 21
-
-Maven 3.8 or later
-
-MySQL (if using a production database)
-
-GETTING STARTED
-
-STEP 1: CLONE THE REPOSITORY
-
-git clone https://github.com/mhmtygmr0/job-portal-web-app.git
-cd job-portal-web-app
-
-STEP 2: CONFIGURE THE DATABASE
-
-Edit the application.properties file to configure your database:
-
-spring.datasource.url=jdbc:mysql://localhost:3306/job_portal
-spring.datasource.username=your_username
-spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=update
-
-STEP 3: BUILD AND RUN THE APPLICATION
-
-mvn clean install
-mvn spring-boot:run
-
-The application will start at http://localhost:8080.
-
-API DOCUMENTATION
-
-AUTHENTICATION
-
-POST /api/auth/register: Register a new user
-
-POST /api/auth/login: Authenticate and receive a JWT token
-
-JOBS
-
-GET /api/jobs: List all jobs
-
-POST /api/jobs: Create a new job (Admin/Recruiter only)
-
-PUT /api/jobs/{id}: Update a job (Admin/Recruiter only)
-
-DELETE /api/jobs/{id}: Delete a job (Admin/Recruiter only)
-
-APPLICATIONS
-
-POST /api/applications: Apply for a job
-
-GET /api/applications: List all applications (Admin only)
-
-CONTRIBUTING
-
-Contributions are welcome! Follow these steps:
-
-Fork the repository
-
-Create a new branch (git checkout -b feature/your-feature)
-
-Commit your changes (git commit -m 'Add some feature')
-
-Push to the branch (git push origin feature/your-feature)
-
-Open a pull request
-
-LICENSE
-
-This project is licensed under the MIT License. See the LICENSE file for more information.
-
-Feel free to reach out for any questions or suggestions!
-
+The frontend of this project was pre-designed and is not included in this repository. This repository only contains the backend implementation.
